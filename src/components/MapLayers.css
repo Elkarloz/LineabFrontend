@@ -1,0 +1,100 @@
+.map-layers-card {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  min-width: 200px;
+  transition: all 0.3s ease;
+}
+
+.layers-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.layers-header h3 {
+  margin: 0;
+  color: #4a5568;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.toggle-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #718096;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.toggle-button:hover {
+  color: #4a5568;
+}
+
+.layers-list {
+  padding: 8px;
+}
+
+.layer-option {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  gap: 12px;
+}
+
+.layer-option:hover {
+  background-color: #f7fafc;
+}
+
+.layer-option.selected {
+  background-color: #ebf8ff;
+}
+
+.radio-button {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #cbd5e0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.layer-option.selected .radio-button {
+  border-color: #4299e1;
+}
+
+.radio-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #4299e1;
+}
+
+.layer-icon {
+  font-size: 18px;
+}
+
+.layer-name {
+  color: #4a5568;
+  font-size: 14px;
+  flex: 1;
+}
+
+.layer-option.selected .layer-name {
+  color: #4299e1;
+  font-weight: 500;
+}
+

@@ -1,0 +1,63 @@
+.route-calculator {
+  background: white;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.route-form {
+  padding: 20px;
+}
+
+.form-section {
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.form-section:last-of-type {
+  border-bottom: none;
+}
+
+.form-section h3 {
+  margin: 0 0 16px 0;
+  color: #4a5568;
+  font-size: 18px;
+}
+
+.route-results {
+  background-color: #ebf8ff;
+  padding: 16px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+.route-results h3 {
+  margin: 0 0 12px 0;
+  color: #4a5568;
+  font-size: 16px;
+}
+
+.result-item {
+  margin-bottom: 8px;
+  color: #2c5282;
+  font-size: 14px;
+}
+
+.btn-calculate {
+  background-color: #4299e1;
+  color: white;
+}
+
+.btn-calculate:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.btn-calculate:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
