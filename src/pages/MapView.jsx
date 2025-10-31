@@ -36,7 +36,6 @@ const MapView = () => {
   const [showPointForm, setShowPointForm] = useState(false)
   const [showRouteCalculator, setShowRouteCalculator] = useState(false)
   const [showBufferTool, setShowBufferTool] = useState(false)
-  const [showBufferReport, setShowBufferReport] = useState(false)
   const [route, setRoute] = useState(null)
   const [buffers, setBuffers] = useState([])
   const [bufferCounter, setBufferCounter] = useState(1)
@@ -44,6 +43,7 @@ const MapView = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [isAddingPoint, setIsAddingPoint] = useState(false)
   const [isAddingBuffer, setIsAddingBuffer] = useState(false)
+  const [showBufferReport, setShowBufferReport] = useState(false)
 
   useEffect(() => {
     loadPlaces()
@@ -275,7 +275,7 @@ const MapView = () => {
         places={places}
         onBufferTool={handleAddBuffer}
         onRouteCalculator={() => setShowRouteCalculator(true)}
-        onBufferReport={() => setShowBufferReport(true)}
+        onShowReports={() => setShowBufferReport(true)}
       />
       
       <div className={`map-container ${isAddingPoint ? 'adding-point' : ''} ${isAddingBuffer ? 'adding-buffer' : ''}`}>
@@ -400,6 +400,13 @@ const MapView = () => {
           }}
         />
       )}
+
+      <BufferReport
+        buffers={buffers}
+        places={places}
+        isOpen={showBufferReport}
+        onClose={() => setShowBufferReport(false)}
+      />
     </div>
   )
 }

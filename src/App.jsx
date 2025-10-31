@@ -4,7 +4,6 @@ import ProtectedRoute from './components/ProtectedRoute'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import MapView from './pages/MapView'
-import Reports from './pages/Reports'
 import './App.css'
 
 function App() {
@@ -18,14 +17,6 @@ function App() {
           element={
             <ProtectedRoute>
               <MapView />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/reports"
-          element={
-            <ProtectedRoute>
-              <Reports />
             </ProtectedRoute>
           }
         />

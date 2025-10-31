@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import './Header.css'
 
 const Header = ({ user, onLogout, onAddPoint, onMenuToggle }) => {
@@ -23,7 +22,6 @@ const Header = ({ user, onLogout, onAddPoint, onMenuToggle }) => {
           </svg>
           Agregar Punto
         </button>
-        <Link to="/reports" className="nav-link">Reportes</Link>
         {user && (
           <div className="user-menu">
             <span className="user-name">{user.nombre || user.email}</span>
