@@ -52,6 +52,26 @@
   cursor: crosshair !important;
 }
 
+.map-container.adding-route .leaflet-container {
+  cursor: crosshair !important;
+}
+
+.map-container.adding-route .leaflet-container * {
+  cursor: crosshair !important;
+}
+
+.map-container.adding-route .leaflet-container .leaflet-interactive {
+  cursor: crosshair !important;
+}
+
+.map-container.adding-route .leaflet-container .leaflet-map-pane {
+  cursor: crosshair !important;
+}
+
+.map-container.adding-route .leaflet-container .leaflet-tile-pane {
+  cursor: crosshair !important;
+}
+
 .popup-content {
   min-width: 200px;
 }

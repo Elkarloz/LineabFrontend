@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './Sidebar.css'
 
-const Sidebar = ({ isOpen, onClose, filters, setFilters, places, onBufferTool, onRouteCalculator, onShowReports }) => {
+const Sidebar = ({ isOpen, onClose, filters, setFilters, places, onBufferTool, onRouteCalculator, onShowReports, user, onLogout }) => {
   const [types, setTypes] = useState([])
 
   // Obtener tipos únicos de los lugares
@@ -81,6 +81,21 @@ const Sidebar = ({ isOpen, onClose, filters, setFilters, places, onBufferTool, o
               📊 Reportes
             </button>
           </div>
+
+          {/* Sección de Usuario */}
+          {user && (
+            <div className="sidebar-section">
+              <button 
+                className="logout-button-sidebar"
+                onClick={() => {
+                  onLogout()
+                  onClose()
+                }}
+              >
+                Cerrar sesión
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </>

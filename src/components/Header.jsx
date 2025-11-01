@@ -1,6 +1,6 @@
 import './Header.css'
 
-const Header = ({ user, onLogout, onAddPoint, onMenuToggle }) => {
+const Header = ({ user, onAddPoint, onMenuToggle }) => {
   return (
     <header className="app-header">
       <div className="header-left">
@@ -25,7 +25,6 @@ const Header = ({ user, onLogout, onAddPoint, onMenuToggle }) => {
         {user && (
           <div className="user-menu">
             <span className="user-name">{user.nombre || user.email}</span>
-            <button onClick={onLogout} className="logout-button">Cerrar sesión</button>
           </div>
         )}
       </div>

@@ -15,7 +15,8 @@ const calculateDistance = (lat1, lon1, lat2, lon2) => {
 }
 
 const BufferReport = ({ buffers, places, isOpen, onClose }) => {
-  const [selectedBuffer, setSelectedBuffer] = useState(null)
+  const [selectedBufferName, setSelectedBufferName] = useState(null)
+  const [isFullscreen, setIsFullscreen] = useState(false)
 
   // Calcular puntos dentro de cada buffer
   const bufferData = useMemo(() => {
@@ -46,34 +47,74 @@ const BufferReport = ({ buffers, places, isOpen, onClose }) => {
     })
   }, [buffers, places])
 
+  // Inicializar o actualizar el buffer seleccionado cuando cambian los datos
   useEffect(() => {
-    if (bufferData.length > 0 && !selectedBuffer) {
-      setSelectedBuffer(bufferData[0])
+    if (bufferData.length > 0) {
+      if (!selectedBufferName) {
+        // Si no hay buffer seleccionado, seleccionar el primero
+        setSelectedBufferName(bufferData[0].name)
+      } else {
+        // Verificar si el buffer seleccionado aún existe
+        const bufferExists = bufferData.some(b => b.name === selectedBufferName)
+        if (!bufferExists) {
+          // Si el buffer seleccionado ya no existe, seleccionar el primero
+          setSelectedBufferName(bufferData[0].name)
+        }
+      }
     }
-  }, [bufferData])
+  }, [bufferData, selectedBufferName])
 
-  if (!isOpen || bufferData.length === 0) {
+  // Resetear estado de pantalla completa cuando se cierra el panel
+  useEffect(() => {
+    if (!isOpen) {
+      setIsFullscreen(false)
+    }
+  }, [isOpen])
+
+  // Obtener el buffer seleccionado actualizado desde bufferData
+  const currentData = bufferData.find(b => b.name === selectedBufferName) || bufferData[0] || null
+
+  if (!isOpen || bufferData.length === 0 || !currentData) {
     return null
   }
 
-  const currentData = selectedBuffer || bufferData[0]
+  const toggleFullscreen = () => {
+    setIsFullscreen(!isFullscreen)
+  }
 
   return (
-    <div className="buffer-report-container">
+    <div className={`buffer-report-container ${isFullscreen ? 'fullscreen' : ''}`}>
       <div className="buffer-report-header">
         <h3>Reporte de Buffers</h3>
-        <button className="buffer-report-close" onClick={onClose}>×</button>
+        <div className="buffer-report-header-buttons">
+          <button 
+            className="buffer-report-expand" 
+            onClick={toggleFullscreen}
+            title={isFullscreen ? 'Contraer' : 'Pantalla completa'}
+          >
+            {isFullscreen ? (
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3" />
+              </svg>
+            ) : (
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
+              </svg>
+            )}
+          </button>
+          <button className="buffer-report-close" onClick={onClose}>×</button>
+        </div>
       </div>
 
       <div className="buffer-report-content">
         <div className="buffer-selector">
           <label>Seleccionar Buffer:</label>
           <select 
-            value={bufferData.findIndex(b => b.name === currentData.name)}
-            onChange={(e) => setSelectedBuffer(bufferData[parseInt(e.target.value)])}
+            value={selectedBufferName || ''}
+            onChange={(e) => setSelectedBufferName(e.target.value)}
           >
-            {bufferData.map((buffer, idx) => (
-              <option key={idx} value={idx}>
+            {bufferData.map((buffer) => (
+              <option key={buffer.name} value={buffer.name}>
                 {buffer.name} ({buffer.totalPoints} puntos)
               </option>
             ))}

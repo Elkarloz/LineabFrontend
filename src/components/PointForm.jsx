@@ -50,7 +50,7 @@ const PointForm = ({ place, onClose, onSave }) => {
     onSave(formData)
   }
 
-  const tipos = ['parque', 'reciclaje', 'zona_verde']
+  const tipos = ['Parque', 'Reciclaje', 'Zona Verde']
 
   return (
     <div className="modal-overlay" onClick={onClose}>

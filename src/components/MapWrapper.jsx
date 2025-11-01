@@ -13,18 +13,23 @@ function MapController({ center, zoom }) {
   return null
 }
 
-function MapClickHandler({ onMapClick }) {
+function MapClickHandler({ onMapClick, onMapMouseMove }) {
   useMapEvents({
     click: (e) => {
       if (onMapClick) {
         onMapClick(e)
+      }
+    },
+    mousemove: (e) => {
+      if (onMapMouseMove) {
+        onMapMouseMove(e)
       }
     }
   })
   return null
 }
 
-const MapWrapper = ({ center, zoom, children, mapType, onMapClick }) => {
+const MapWrapper = ({ center, zoom, children, mapType, onMapClick, onMapMouseMove }) => {
   const getTileLayerUrl = () => {
     switch (mapType) {
       case 'satelital':
@@ -46,7 +51,7 @@ const MapWrapper = ({ center, zoom, children, mapType, onMapClick }) => {
       scrollWheelZoom={true}
     >
       <MapController center={center} zoom={zoom} />
-      <MapClickHandler onMapClick={onMapClick} />
+      <MapClickHandler onMapClick={onMapClick} onMapMouseMove={onMapMouseMove} />
       <TileLayer 
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url={getTileLayerUrl()} 
